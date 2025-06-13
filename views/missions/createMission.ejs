@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Create Mission</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <%- include('../partials/header') %>
+
+  <h1>Create New Mission</h1>
+
+  <form action="/api/missions" method="POST">
+    <label for="missionId">Mission ID:</label>
+    <input type="text" id="missionId" name="missionId" required>
+
+    <label for="shipAssigned">Ship Assigned:</label>
+    <select id="shipAssigned" name="shipAssigned" required>
+      <% ships.forEach(ship => { %>
+        <option value="<%= ship._id %>"><%= ship.name %> - <%= ship.registryNumber %></option>
+      <% }) %>
+    </select>
+
+    <label for="destinationPlanet">Destination Planet:</label>
+    <input type="text" id="destinationPlanet" name="destinationPlanet" required>
+
+    <label for="missionPurpose">Mission Purpose:</label>
+    <select id="missionPurpose" name="missionPurpose" required>
+      <option value="exploration">Exploration</option>
+      <option value="first contact">First Contact</option>
+      <option value="support UESEC bases">Support UESEC Bases</option>
+    </select>
+
+    <label for="missionDate">Mission Date:</label>
+    <input type="date" id="missionDate" name="missionDate" required>
+
+    <button type="submit">Create Mission</button>
+  </form>
+</body>
+</html>

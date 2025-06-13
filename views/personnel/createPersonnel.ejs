@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Create Personnel</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <%- include('../partials/header') %>
+
+  <h1>Create New Personnel</h1>
+
+    <form action="/api/personnel" method="POST">
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name" required>
+
+      <label for="rank">Rank:</label>
+      <input type="text" id="rank" name="rank" required>
+
+      <label>Skills:</label><br>
+      <input type="checkbox" name="skills" value="Navigation"> Navigation<br>
+      <input type="checkbox" name="skills" value="Command"> Command<br>
+      <input type="checkbox" name="skills" value="Engine Operations"> Engine Operations<br>
+      <input type="checkbox" name="skills" value="Medical"> Medical<br>
+      <input type="checkbox" name="skills" value="Science"> Science<br>
+
+      <label for="serviceId">Service ID:</label>
+      <input type="text" id="serviceId" name="serviceId">
+
+      <label for="dateOfEnlistment">Date of Enlistment:</label>
+      <input type="date" id="dateOfEnlistment" name="dateOfEnlistment">
+
+      <label for="technicalSpecialty">Technical Specialty:</label>
+      <input type="text" id="technicalSpecialty" name="technicalSpecialty">
+
+      <button type="submit">Add Personnel</button>
+    </form>
+
+</body>
+</html>

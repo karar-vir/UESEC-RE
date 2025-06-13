@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Edit Ship</title>
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+
+  <%- include('../partials/header') %>
+
+  <h1>Edit Ship: <%= ship.name %></h1>
+
+  <form action="/api/ships/<%= ship._id %>?_method=PUT" method="POST">
+    <label>Name:</label><br>
+    <input type="text" name="name" value="<%= ship.name %>" required><br><br>
+
+    <label>Registry Number:</label><br>
+    <input type="text" name="registryNumber" value="<%= ship.registryNumber %>" required><br><br>
+
+    <label>Crew Members:</label><br>
+    <select name="crew" multiple size="5">
+      <% personnel.forEach(person => { %>
+        <option value="<%= person._id %>" 
+          <%= ship.crew.some(c => c._id.equals(person._id)) ? 'selected' : '' %> >
+          <%= person.name %> - <%= person.rank %>
+        </option>
+      <% }) %>
+    </select><br><br>
+
+    <button type="submit">Update Ship</button>
+  </form>
+
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Create New Ship</title>
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+
+  <%- include('../partials/header') %>
+
+  <h1>Create New Ship</h1>
+
+  <form action="/api/ships" method="POST">
+    <label>Name:</label><br>
+    <input type="text" name="name" required><br><br>
+
+    <label>Registry Number:</label><br>
+    <input type="text" name="registryNumber" required><br><br>
+
+    <label>Mission Schedule (comma separated):</label><br>
+    <input type="text" name="missionSchedule" required><br><br>
+
+    <label>Crew Members:</label><br>
+    <select name="crew" multiple size="5">
+      <% personnel.forEach(person => { %>
+        <option value="<%= person._id %>"><%= person.name %> - <%= person.rank %></option>
+      <% }) %>
+    </select><br><br>
+
+    <button type="submit">Create Ship</button>
+  </form>
+
+</body>
+</html>

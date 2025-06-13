@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Personnel List</title>
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+  <%- include('../partials/header') %>
+
+  <h1>Personnel List</h1>
+
+  <% if (personnels.length === 0) { %>
+    <p>No personnel found.</p>
+  <% } else { %>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Rank</th>
+          <th>Skills</th>
+          <th>Service ID</th>
+          <th>Date of Enlistmet</th>
+          <th>Technical Specility</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% personnels.forEach(personnel => { %>
+          <tr>
+            <td><%= personnel.name %></td>
+            <td><%= personnel.rank %></td>
+            <td><%= personnel.skills.join(', ') %></td>
+            <td><%= personnel.serviceId %></td>
+            <td><%= personnel.dateOfEnlistment ? personnel.dateOfEnlistment.toDateString() : '' %></td>
+            <td>
+              <%= personnel.technicalSpecialty %>
+              <div>
+                <a href="/api/personnel/<%= personnel._id %>/edit" class="edit-btn">Edit</a>
+                <form action="/api/personnel/<%= personnel._id %>?_method=DELETE" method="POST" style="display:inline;">
+                  <button type="submit" class="delete-btn">Delete</button>
+                </form>
+
+              </div>
+            </td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  <% } %>
+
+</body>
+</html>

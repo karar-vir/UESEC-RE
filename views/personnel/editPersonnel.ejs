@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Edit Personnel</title>
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+  <%- include('../partials/header') %>
+
+  <h1>Edit Personnel</h1>
+
+  <form action="/api/personnel/<%= personnel._id %>?_method=PUT" method="POST">
+
+    <label>Name:</label>
+    <input type="text" name="name" value="<%= personnel.name %>" required />
+
+    <label>Rank:</label>
+    <input type="text" name="rank" value="<%= personnel.rank %>" required />
+
+    <label>Skills:</label><br>
+
+    <% const skills = ['Navigation', 'Command', 'Engine Operations', 'Medical', 'Science']; %>
+    <% skills.forEach(skill => { %>
+      <input type="checkbox" name="skills" value="<%= skill %>" 
+        <% if (personnel.skills.includes(skill)) { %>checked<% } %> 
+      /> <%= skill %><br>
+    <% }) %>
+
+    <label>Service ID:</label>
+    <input type="text" name="serviceId" value="<%= personnel.serviceId || '' %>" />
+
+    <label>Date of Enlistment:</label>
+    <input type="date" name="dateOfEnlistment" 
+           value="<%= personnel.dateOfEnlistment ? personnel.dateOfEnlistment.toISOString().split('T')[0] : '' %>" />
+
+    <label>Technical Specialty:</label>
+    <input type="text" name="technicalSpecialty" value="<%= personnel.technicalSpecialty || '' %>" />
+
+    <button type="submit">Update</button>
+  </form>
+</body>
+</html>

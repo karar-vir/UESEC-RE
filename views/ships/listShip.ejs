@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>All Ships</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+  <%- include('../partials/header') %>
+
+  <h1>Listed Ship Records</h1>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Registry Number</th>
+        <th>Mission Schedule</th>
+        <th>Crew Members</th>
+        <th>Actions</th> 
+      </tr>
+    </thead>
+    <tbody>
+      <% ships.forEach(ship => { %>
+        <tr>
+          <td><%= ship.name %></td>
+          <td><%= ship.registryNumber %></td>
+          <td>
+            <ul>
+              <% ship.missionSchedule.forEach(mission => { %>
+                <li>
+                  <strong>Destination:</strong> <%= mission.destination %><br>
+                  <strong>Date:</strong> <%= mission.date ? mission.date.toDateString() : 'N/A' %><br>
+                  <strong>Purpose:</strong> <%= mission.purpose %>
+                </li>
+              <% }) %>
+            </ul>
+          </td>
+          <td>
+            <ul>
+              <% ship.crew.forEach(member => { %>
+                <li><%= member.name %> - <%= member.rank || 'N/A' %></li>
+              <% }) %>
+            </ul>
+          </td>
+          <td>
+            <!-- Edit Button -->
+            <a href="/api/ships/<%= ship._id %>/edit" class="edit-btn">Edit</a>
+            
+            <!-- Delete Button -->
+            <form action="/api/ships/<%= ship._id %>?_method=DELETE" method="POST" style="display:inline;">
+              <button type="submit" class="delete-btn">Delete</button>
+            </form>
+          </td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+
+</body>
+</html>
